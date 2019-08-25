@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+if (file_exists($file = dirname(__DIR__) . "/../../autoload.php")) {
+  /** @noinspection PhpIncludeInspection */
+  require $file;
+}
+else {
+  die("Can't find autoload.php");
+}
+
+(new DataMincerLauncher\App())->run();
+

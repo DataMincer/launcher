@@ -1,0 +1,31 @@
+{
+  "name": "datamincer/launcher",
+  "version": "0.1",
+  "description": "DataMincer: Launcher",
+  "license": "LGPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Artiom Neganov",
+      "email": "aneganov@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "type": "project",
+  "bin": ["bin/dm"],
+  "minimum-stability": "dev",
+  "require": {
+    "datamincer/core": "dev-master",
+    "onkeltem/task-runner": "dev-master",
+    "docopt/docopt": "*",
+    "symfony/yaml": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "DataMincerLauncher\\": "src/"
+    },
+    "files": [
+      "src/Task/BundleTask.php",
+      "src/Task/DeckTask.php"
+    ]
+  }
+}
