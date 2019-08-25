@@ -25,7 +25,7 @@
     },
     "files": [
       "src/Task/BundleTask.php",
-      "src/Task/DeckTask.php"
+      "src/Task/UnitTask.php"
     ]
   }
 }

@@ -21,7 +21,7 @@ class BundleTask extends Task {
   public function run() {
     $result = [];
     $yaml_indent = 2;
-    $dm = $this->app->deckManager();
+    $dm = $this->app->manager();
     $verbose = $this->options['verbose'] <= 2 ? $this->options['verbose'] : 2;
 
     if ($this->options['help']) {

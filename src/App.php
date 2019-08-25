@@ -41,7 +41,7 @@ class App extends \TaskRunner\App {
     }
   }
 
-  public function deckManager() {
+  public function manager() {
     return $this->deckManager;
   }
 
