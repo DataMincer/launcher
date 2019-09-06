@@ -30,8 +30,8 @@ class App extends \TaskRunner\App {
   /** @var LoggerInterface */
   protected $logger;
 
-  public function __construct() {
-    parent::__construct();
+  public function __construct($params = []) {
+    parent::__construct($params);
     try {
       $this->manager = new Manager($this->options, $this->logger);
     }
