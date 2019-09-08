@@ -66,7 +66,7 @@ Commands:
   unit help             List defined tasks.
 
 Options:
-  --base=PATH           Path to the dir with unit bundles data. [Default: ./]
+  --base=PATH           Path to the dir with unit bundles data. [Default: ./bundles]
   --build=PATH          Path to the dir used to build units. [Default: ./build]
   --unit=DECK           Limit operations down to the single unit.
   -v...                 Show more details when running some tasks. Repeating may increase verbosity.
