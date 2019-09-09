@@ -12,8 +12,9 @@ class App extends \TaskRunner\App {
   protected $manager;
 
   protected static $paramsMap = [
-    'basePath' => '--base',
+    'bundlesPath' => '--bundles',
     'buildPath' => '--build',
+    'tempPath' => '--temp',
     'filters' => '--filter',
     'novalidate' => '--novalidate',
     'verbose' => '-v',
@@ -66,8 +67,9 @@ Commands:
   unit help             List defined tasks.
 
 Options:
-  --base=PATH           Path to the dir with unit bundles data. [Default: ./bundles]
-  --build=PATH          Path to the dir used to build units. [Default: ./build]
+  --bundles=PATH        Path to the dir with unit bundles data. Defaults to bundles.
+  --build=PATH          Path to the dir used to build units. Defaults to build.
+  --temp=PATH           Path to the dir used as temporary. Defaults to the result of sys_get_temp_dir().
   --unit=DECK           Limit operations down to the single unit.
   -v...                 Show more details when running some tasks. Repeating may increase verbosity.
   --novalidate          Don't validate schemas (speeds up execution, but may rise unhandled exceptions).
