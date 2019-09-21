@@ -16,6 +16,7 @@ class App extends \TaskRunner\App {
     'buildPath' => '--build',
     'tempPath' => '--temp',
     'filters' => '--filter',
+    'overrides' => '--override',
     'novalidate' => '--novalidate',
     'verbose' => '-v',
     'debug' => '--debug',
@@ -56,64 +57,87 @@ Usage:
     [options] 
     [-v...]
     [--debug] 
-    [--filter=FILTER...] 
+    [--filter=FILTER...]
+    [--override=OVERRIDE...] 
 
 Commands:
-  bundle                Lists available bundles and their details.
-  bundle TASK           Execute task TASK on available bundles.
-  bundle help           List defined tasks.
-  unit                  Lists available units and their details.
-  unit TASK             Execute task TASK on available units.
-  unit help             List defined tasks.
+  bundle                 Lists available bundles and their details.
+  bundle TASK            Execute task TASK on available bundles.
+  bundle help            List defined tasks.
+  unit                   Lists available units and their details.
+  unit TASK              Execute task TASK on available units.
+  unit help              List defined tasks.
 
 Options:
-  --bundles=PATH        Path to the dir with unit bundles data. Defaults to bundles.
-  --build=PATH          Path to the dir used to build units. Defaults to build.
-  --temp=PATH           Path to the dir used as temporary. Defaults to the result of sys_get_temp_dir().
-  --unit=DECK           Limit operations down to the single unit.
-  -v...                 Show more details when running some tasks. Repeating may increase verbosity.
-  --novalidate          Don't validate schemas (speeds up execution, but may rise unhandled exceptions).
-  --debug               Show debugging information when running some tasks.
-  --timer               Enable timer.
-  --filter=FILTER...    Filter the units to work with. Represents a list in the following format:
+  --bundles=PATH         Path to the dir with unit bundles data. Defaults to bundles.
+  --build=PATH           Path to the dir used to build units. Defaults to build.
+  --temp=PATH            Path to the dir used as temporary. Defaults to the result of sys_get_temp_dir().
+  --unit=DECK            Limit operations down to the single unit.
+  -v...                  Show more details when running some tasks. Repeating may increase verbosity.
+  --novalidate           Don't validate schemas (speeds up execution, but may rise unhandled exceptions).
+  --debug                Show debugging information when running some tasks.
+  --timer                Enable timer.
+  --filter=FILTER...     Filter bundles and units to work with. Represents a list in the following format:
 
-                          FILTER ::= [BUNDLE][:SELECTOR[;SELECTOR...]]
-                          SELECTOR ::= SELECTOR(i)[(:SELECTOR(i+1))...]
-                          SELECTOR(i) ::= (DIMENSION=DOMAIN-Ri[.VALUE][,DOMAIN-Ri[.VALUE]...])
+                           FILTER ::= [BUNDLE][:SELECTOR[;SELECTOR...]]
+                           SELECTOR ::= SELECTOR(i)[(:SELECTOR(i+1))...]
+                           SELECTOR(i) ::= (DIMENSION=DOMAIN-Ri[.VALUE][,DOMAIN-Ri[.VALUE]...])
 
-                        Here "i" starts at "0" and represents domain's register index. The list of 
-                        domains and their definitions are read from the BUNDLE's bundle.yml file. 
+                         Here "i" starts at "0" and represents domain's register index. The list of 
+                         domains and their definitions are read from the BUNDLE's bundle.yml file. 
 
-                        Given this bundle.yml for a 'basic-numbers' bundle:
+                         Given this bundle.yml for a 'basic-numbers' bundle:
 
-                          lang/[]:
-                            en:  ["en-US", "en-GB"]
-                            fr:  ["fr-FR"]
-                            :fr: ["fr-CA"]
+                           lang/[]:
+                             en:  ["en-US", "en-GB"]
+                             fr:  ["fr-FR"]
+                             :fr: ["fr-CA"]
 
-                          deck/<>:
-                            numbers: ["10-100", "1000-2000"]
-                            letters: ["a-z"]
+                           deck/<>:
+                             numbers: ["10-100", "1000-2000"]
+                             letters: ["a-z"]
 
-                        the following invocations are possible:
+                         the following invocations are possible:
 
-                          basic-numbers:lang=en
-                            - Select units which primary language is "en" (both British or American).
+                           basic-numbers:lang=en
+                             - Select units which primary language is "en" (both British or American).
 
-                          basic-numbers:lang=en.en-US
-                            - Select units which primary language is "en" (American English).
+                           basic-numbers:lang=en.en-US
+                             - Select units which primary language is "en" (American English).
 
-                          basic-numbers:lang=en:fr
-                            - Select units which primary language is "en" and native language is "fr".
+                           basic-numbers:lang=en:fr
+                             - Select units which primary language is "en" and native language is "fr".
 
-                          basic-numbers:deck=numbers
-                            - Select units from dimension "deck", domain "numbers".
+                           basic-numbers:deck=numbers
+                             - Select units from dimension "deck", domain "numbers".
 
-                          basic-numbers:lang=:ru\;deck=numbers
-                            - Select units from dimension "deck" domain "numbers" and having "ru" as native language.
+                           basic-numbers:lang=:ru;deck=numbers
+                             - Select units from dimension "deck" domain "numbers" and having "ru" as native language.
 
-                          basic-numbers:lang=en,fr
-                            - Select units having primary language "en" or "fr"
+                           basic-numbers:lang=en,fr
+                             - Select units having primary language "en" or "fr"
+  --override=OVERRIDE... Override yaml subtrees of one or more bundles. Represents a list in the following format:
+
+                           OVERRIDE ::= [BUNDLE][:ASSIGNMENT[;ASSIGNMENT...]]
+                           ASSIGNMENT ::= PATH=VALUE
+
+                         Each PATH should be an existing item of the tree. Path items are separated with dot - ".".
+                         Note: overrides don't support dimensions!
+                        
+                         For example:
+                        
+                           :global.deckGroup=MyGroup
+                             - Override "global.deckGroup" variable with the value of "MyGroup" for all units 
+                               being processed.
+                        
+                           basic-numbers:global.deckGroup=MyGroup
+                             - Override "global.deckGroup" variable with the value of "MyGroup" for the unit 
+                               "basic-numbers".
+
+                           basic-numbers:global.buildName=MyDeck;global.deckGroup=MyGroup;
+                             - Override "global.deckGroup" and "global.buildName" variables correspondingly for the 
+                               unit "basic-numbers".
+
 TXT;
   }
 
