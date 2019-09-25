@@ -13,6 +13,7 @@ class App extends \TaskRunner\App {
 
   protected static $paramsMap = [
     'bundlesPath' => '--bundles',
+    'bundlePath' => '--bundle',
     'buildPath' => '--build',
     'tempPath' => '--temp',
     'filters' => '--filter',
@@ -69,7 +70,9 @@ Commands:
   unit help              List defined tasks.
 
 Options:
-  --bundles=PATH         Path to the dir with unit bundles data. Defaults to bundles.
+  --bundle=PATH          Runs single-bundle processing and specifies a path to the directory with the bundle. 
+                         This mode is the default one. [Default: ./]
+  --bundles=PATH         Runs multi-bundle processing and specifies a path to the directory with bundles directories.
   --build=PATH           Path to the dir used to build units. Defaults to build.
   --temp=PATH            Path to the dir used as temporary. Defaults to the result of sys_get_temp_dir().
   --unit=DECK            Limit operations down to the single unit.
