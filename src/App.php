@@ -16,6 +16,8 @@ class App extends \TaskRunner\App {
     'bundlePath' => '--bundle',
     'buildPath' => '--build',
     'tempPath' => '--temp',
+    'cachePath' => '--cache',
+    'statePath' => '--state',
     'filters' => '--filter',
     'overrides' => '--override',
     'novalidate' => '--novalidate',
@@ -74,7 +76,9 @@ Options:
                          This mode is the default one. [Default: ./]
   --bundles=PATH         Runs multi-bundle processing and specifies a path to the directory with bundles directories.
   --build=PATH           Path to the dir used to build units. Defaults to build.
-  --temp=PATH            Path to the dir used as temporary. Defaults to the result of sys_get_temp_dir().
+  --temp=PATH            Path to the dir used as temporary storage. Defaults to "{sys_get_temp_dir()}/datamincer/tmp".
+  --cache=PATH           Path to the dir used as cache storage. Defaults to "{sys_get_temp_dir()}/datamincer/cache".
+  --state=PATH           Path to the dir used as state storage. Defaults to "{sys_get_temp_dir()}/datamincer/state".
   --unit=DECK            Limit operations down to the single unit.
   -v...                  Show more details when running some tasks. Repeating may increase verbosity.
   --novalidate           Don't validate schemas (speeds up execution, but may rise unhandled exceptions).
