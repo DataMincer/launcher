@@ -4,7 +4,6 @@ namespace DataMincerLauncher;
 
 use Exception;
 use DataMincerCore\Manager;
-use TaskRunner\LoggerInterface;
 
 class App extends \TaskRunner\App {
 
@@ -32,16 +31,13 @@ class App extends \TaskRunner\App {
     'help' => 'help'
   ];
 
-  /** @var LoggerInterface */
-  protected $logger;
-
   public function __construct($params = []) {
     parent::__construct($params);
     try {
       $this->manager = new Manager($this->options, $this->logger);
     }
     catch(Exception $e) {
-      $this->logger()->err($e->getMessage());
+      $this->logger()->error($e->getMessage());
       die(1);
     }
   }

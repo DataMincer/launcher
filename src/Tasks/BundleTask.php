@@ -2,10 +2,10 @@
 
 namespace DataMincerLauncher\Task;
 
-use Exception;
 use Symfony\Component\Yaml\Yaml;
 use TaskRunner\Task;
 use DataMincerLauncher\App;
+use TaskRunner\TaskRunnerException;
 use YamlElc\Dimension;
 
 /**
@@ -16,7 +16,7 @@ class BundleTask extends Task {
   protected static $taskId = 'bundle';
 
   /**
-   * @throws Exception
+   * @throws TaskRunnerException
    */
   public function run() {
     $result = [];
@@ -25,14 +25,14 @@ class BundleTask extends Task {
     $verbose = $this->options['verbose'] <= 2 ? $this->options['verbose'] : 2;
 
     if ($this->options['help']) {
-      $this->logger->msg('Available tasks: ');
-      $this->logger->msg('info');
-      $this->logger->msg("\t" . "Lists available bundles and their details.");
+      $this->logger->info("Available tasks:");
+      $this->logger->info("info\n");
+      $this->logger->info("\t" . "Lists available bundles and their details.");
     }
     else {
       $task_name = $this->options['task'];
       if ($task_name !== 'info') {
-        throw new Exception("Bundle task '$task_name' is not defined.");
+        throw new TaskRunnerException("Bundle task '$task_name' is not defined.");
       }
       switch ($verbose) {
         case 0:
@@ -65,9 +65,9 @@ class BundleTask extends Task {
           }
           break;
         default:
-          throw new Exception("Unknown verbose option.");
+          throw new TaskRunnerException("Unknown verbose option.");
       }
-      $this->logger->msg(Yaml::dump($result, $yaml_indent));
+      $this->logger->info(Yaml::dump($result, $yaml_indent));
     }
   }
 
@@ -78,7 +78,6 @@ class BundleTask extends Task {
     }
     return implode(', ', $result);
   }
-
 
   protected function renderConditions(array $conditions) {
     $lines = [];

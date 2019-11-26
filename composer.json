@@ -1,6 +1,5 @@
 {
   "name": "datamincer/launcher",
-  "version": "0.1",
   "description": "DataMincer: Launcher",
   "license": "LGPL-3.0-or-later",
   "authors": [
@@ -24,8 +23,8 @@
       "DataMincerLauncher\\": "src/"
     },
     "files": [
-      "src/Task/BundleTask.php",
-      "src/Task/UnitTask.php"
+      "src/Tasks/BundleTask.php",
+      "src/Tasks/UnitTask.php"
     ]
   }
 }
