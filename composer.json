@@ -9,14 +9,12 @@
       "role": "Developer"
     }
   ],
-  "type": "project",
+  "type": "library",
   "bin": ["bin/dm"],
-  "minimum-stability": "dev",
   "require": {
-    "datamincer/core": "dev-master",
-    "onkeltem/task-runner": "dev-master",
-    "docopt/docopt": "*",
-    "symfony/yaml": "*"
+    "datamincer/core": "*",
+    "onkeltem/task-runner": "^0.0.4",
+    "symfony/yaml": "^2.8.52"
   },
   "autoload": {
     "psr-4": {

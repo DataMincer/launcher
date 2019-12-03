@@ -51,7 +51,7 @@ class App extends \TaskRunner\App {
 DataMincer Launcher
 
 Usage:
-  dm-dm (bundle | unit [--unit=DECK]) 
+  dm (bundle | unit [--unit=UNIT]) 
     (help | TASK [PARAMS...])
     [options] 
     [-v...]
@@ -75,7 +75,7 @@ Options:
   --temp=PATH            Path to the dir used as temporary storage. Defaults to "{sys_get_temp_dir()}/datamincer/tmp".
   --cache=PATH           Path to the dir used as cache storage. Defaults to "{sys_get_temp_dir()}/datamincer/cache".
   --state=PATH           Path to the dir used as state storage. Defaults to "{sys_get_temp_dir()}/datamincer/state".
-  --unit=DECK            Limit operations down to the single unit.
+  --unit=UNIT            Limit operations down to the single unit.
   -v...                  Show more details when running some tasks. Repeating may increase verbosity.
   --novalidate           Don't validate schemas (speeds up execution, but may rise unhandled exceptions).
   --debug                Show debugging information when running some tasks.
